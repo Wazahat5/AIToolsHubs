@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Section | AI Tools Hub</title>
+
+    <style>
+        /* Review Section Styling */
+        .review-section {
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        input, textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .rating span {
+            font-size: 24px;
+            cursor: pointer;
+            color: gray;
+        }
+
+        .rating span.active {
+            color: gold;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .review {
+            background-color: white;
+            padding: 15px;
+            margin-top: 10px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .review .username {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .review .stars {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Review Section -->
+    <section class="review-section">
+        <h2>User Reviews</h2>
+
+        <!-- Review Form -->
+        <input type="text" id="userName" placeholder="Enter your name" />
+        <textarea id="userReview" placeholder="Write your review here..."></textarea>
+
+        <!-- Star Rating -->
+        <div class="rating">
+            <span onclick="setRating(1)">★</span>
+            <span onclick="setRating(2)">★</span>
+            <span onclick="setRating(3)">★</span>
+            <span onclick="setRating(4)">★</span>
+            <span onclick="setRating(5)">★</span>
+        </div>
+
+        <button onclick="submitReview()">Submit Review</button>
+
+        <!-- Display User Reviews -->
+        <div id="reviewsContainer"></div>
+    </section>
+
+    <script>
+        let currentRating = 0;
+
+        // Function for Star Rating
+        function setRating(rating) {
+            currentRating = rating;
+            const stars = document.querySelectorAll(".rating span");
+            stars.forEach((star, index) => {
+                star.classList.toggle("active", index < rating);
+            });
+        }
+
+        // Submit Review Function
+        function submitReview() {
+            const userName = document.getElementById("userName").value;
+            const userReview = document.getElementById("userReview").value;
+            const reviewsContainer = document.getElementById("reviewsContainer");
+
+            if (userName === "" || userReview === "" || currentRating === 0) {
+                alert("Please fill all fields and select a rating.");
+                return;
+            }
+
+            const reviewHTML = `
+                <div class="review">
+                    <p class="username">${userName}</p>
+                    <div class="stars">${"★".repeat(currentRating)}${"☆".repeat(5 - currentRating)}</div>
+                    <p>${userReview}</p>
+                </div>
+            `;
+
+            reviewsContainer.innerHTML += reviewHTML;
+
+            // Clear Form After Submitting
+            document.getElementById("userName").value = "";
+            document.getElementById("userReview").value = "";
+            setRating(0); // Reset Stars
+        }
+    </script>
+
+</body>
+</html>

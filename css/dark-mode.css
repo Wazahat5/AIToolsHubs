@@ -1,0 +1,72 @@
+/* Dark Mode Variables */
+body.dark-mode {
+    --primary-color: #3b82f6;
+    --secondary-color: #60a5fa;
+    --text-color: #e5e7eb;
+    --background-color: #111827;
+    --card-background: #1f2937;
+    --border-color: #374151;
+    --shadow-color: rgba(0, 0, 0, 0.25);
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: var(--text-color);
+    transition: background-color 0.3s ease;
+}
+
+#theme-toggle:hover {
+    background-color: var(--card-background);
+}
+
+/* Show/Hide Moon/Sun based on theme */
+body:not(.dark-mode) .moon {
+    display: inline-block;
+}
+
+body:not(.dark-mode) .sun {
+    display: none;
+}
+
+body.dark-mode .moon {
+    display: none;
+}
+
+body.dark-mode .sun {
+    display: inline-block;
+}
+
+/* Dark Mode Specific Styles */
+body.dark-mode .hero {
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+}
+
+body.dark-mode .cta-button {
+    background-color: var(--card-background);
+    color: var(--text-color);
+}
+
+body.dark-mode .navbar {
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Smooth Transitions */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar,
+.tool-category,
+.footer,
+.cta-button {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+} 
